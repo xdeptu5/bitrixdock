@@ -12,7 +12,7 @@ services:
             - bitrixdock
         restart: unless-stopped
         extra_hosts:
-            - "bitrix.local:172.20.0.9"
+            - "bitrix.local:172.30.0.9"
 
     web_server:
         build: ./${WEB_SERVER_TYPE}
@@ -25,13 +25,13 @@ services:
             - '${INTERFACE}:443:443'
         networks:
             bitrixdock:
-                ipv4_address: 172.20.0.9
+                ipv4_address: 172.30.0.9
         environment:
             TZ: Europe/Moscow
         restart: unless-stopped
         extra_hosts:
-            - "push-server-sub:172.20.0.10"
-            - "push-server-pub:172.20.0.11"
+            - "push-server-sub:172.30.0.10"
+            - "push-server-pub:172.30.0.11"
 
     db:
         build: ./${DB_SERVER_TYPE}
@@ -77,7 +77,7 @@ services:
         image: ikarpovich/bitrix-push-server
         networks:
             bitrixdock:
-                ipv4_address: 172.20.0.10
+                ipv4_address: 172.30.0.10
         environment:
             - REDIS_HOST=redis
             - LISTEN_HOSTNAME=0.0.0.0
@@ -93,7 +93,7 @@ services:
         image: ikarpovich/bitrix-push-server
         networks:
             bitrixdock:
-                ipv4_address: 172.20.0.11
+                ipv4_address: 172.30.0.11
         environment:
             - REDIS_HOST=redis
             - LISTEN_HOSTNAME=0.0.0.0
@@ -120,4 +120,4 @@ networks:
     bitrixdock:
         ipam:
             config:
-                - subnet: 172.20.0.0/24
+                - subnet: 172.30.0.0/24
